@@ -1,6 +1,87 @@
 import streamlit as st
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
+st.title("MediBot")
+st.write("Enter your symptoms separated by commas:")
+
+symptom_input = st.text_input("Symptoms", "")
+
+if symptom_input:
+    symptoms_list = [s.strip() for s in symptom_input.split(",") if s.strip()]
+    
+    st.subheader("Your Symptoms:")
+    for i, symptom in enumerate(symptoms_list, 1):
+        st.write(f"{i}. {symptom}")
+    
+    selected = st.selectbox("Select your most concerning symptom:", symptoms_list)
+
+    if selected:
+        st.write(f"You selected: **{selected}**")
+        selected_lower = selected.lower()
+
+        if "runny nose" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated (drink 500mL of water), and use Nasonex (a steroid nasal spray).")
+        elif "sore throat" in selected_lower:
+            st.write("**Suggested action:** Take rest and stay hydrated (drink 500mL of water).")
+        elif "vomiting" in selected_lower:
+            st.write("**Suggested action:** Take rest and stay hydrated (drink 500mL of water).")
+        elif "fever" in selected_lower:
+            st.write("**Suggested action:** Get plenty of rest, stay hydrated (drink 500mL of water), and consider acetaminophen or ibuprofen.")
+        elif "cough" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated (drink 500mL of water), and use Nasonex.")
+        elif "headache" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated (drink 500mL of water), and use ibuprofen.")
+        elif "thunderclap headache" in selected_lower:
+            st.write("**Suggested action:** Seek medical attention immediatly, could be sign of brain anurysm.")
+        elif "nausea" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider meclizine or dimenhydrinate.")
+        elif "diarrhea" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider loperamide.")
+        elif "muscle soreness" in selected_lower:
+            st.write("**Suggested action:** Put on muscle cream and relax that body part.")
+        elif "blocked ear" in selected_lower:
+            st.write("**Suggested action:** Try inhaling steam, or using ear drops to soften earwax. If symptoms persist, seek medical attention")
+        elif "constipation" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider bisacodyl or senna.")
+        elif "fatigue" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider acetaminophen or ibuprofen.")
+        elif "muscle pain" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider acetaminophen or ibuprofen.")
+        elif "chills" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider acetaminophen or ibuprofen.")
+        elif "sweating" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider acetaminophen or ibuprofen.")
+        elif "dizziness" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider meclizine or dimenhydrinate.")
+        elif "chest pain" in selected_lower or "shortness of breath" in selected_lower:
+            st.error("**Suggested action:** Seek immediate medical attention. These can be signs of a serious condition.")
+        elif "back pain" in selected_lower or "shortness of breath" in selected_lower:
+            st.error("**Suggested action:** Take parcetamol, ibuprofen or use hot water pack over area of pain. Bedrest if the pain is too bad")
+        elif "leg pain" in selected_lower or "shortness of breath" in selected_lower:
+            st.error("**Suggested action:** Take parcetamol, ibuprofen or use hot water pack over area of pain. Bedrest if the pain is too bad")
+        elif "covid" in selected_lower or "coronavirus" in selected_lower:
+            st.error("**Suggested action** Most people with COVID-19 have mild illness and can recover at home. You can treat symptoms with over-the-counter medicines, such as acetaminophen or ibuprofen, to help feel better.")
+        elif "abdominal pain" in selected_lower or "shortness of breath" in selected_lower:
+            st.error("**Suggested action:** Take parcetamol, ibuprofen or use hot water pack over area of pain. Bedrest if the pain is too bad")
+        elif "swelling" in selected_lower:
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider acetaminophen or ibuprofen.")
+        elif any(x in selected_lower for x in ["rash", "itching", "burning"]):
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider hydrocortisone cream or calamine lotion.")
+        elif any(x in selected_lower for x in ["numbness", "tingling"]):
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider acetaminophen or ibuprofen.")
+        elif any(x in selected_lower for x in [
+            "confusion", "seizures", "vision changes", "hearing changes", "memory loss",
+            "difficulty swallowing", "difficulty speaking", "difficulty walking",
+            "difficulty breathing", "difficulty urinating", "difficulty defecating"
+        ]):
+            st.error("**Suggested action:** Seek immediate medical attention. This could indicate a serious condition.")
+        elif any(x in selected_lower for x in [
+            "difficulty sleeping", "difficulty concentrating", "difficulty remembering",
+            "difficulty thinking", "difficulty understanding", "difficulty communicating",
+            "difficulty socializing", "difficulty working"
+        ]):
+            st.write("**Suggested action:** Take rest, stay hydrated, and consider appropriate OTC medications (e.g., acetaminophen, melatonin).")
+        else:
+            st.warning("Sorry, I didn't understand the symptom or it is not in the supported list.")
+
+
+
